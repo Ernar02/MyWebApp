@@ -1,13 +1,12 @@
 # MyWebApp
 
-ASP.NET MVC приложение с поддержкой:
+ASP.NET MVC application with support for:
+- 🔐 User registration and authentication
+- ⚙️ Administrative panel
+- 🎨 Bootstrap and jQuery-based interface
+- 🌐 Deployed on [yernar.runasp.net](https://yernar.runasp.net/)
 
-- 🔐 Регистрации и авторизации пользователей
-- ⚙️ Административной панели
-- 🎨 Интерфейса на основе Bootstrap и jQuery
-- 🌐 Деплой на [yernar.runasp.net](https://yernar.runasp.net/)
-
-## 🔧 Используемые технологии
+## 🔧 Technologies Used
 
 - ASP.NET MVC
 - C#
@@ -16,16 +15,15 @@ ASP.NET MVC приложение с поддержкой:
 - jQuery
 - MS SQL Server
 
-## 🚀 Демо
+## 🚀 Demo
 
-Проект доступен по адресу:  
+The project is available at:  
 👉 [https://yernar.runasp.net/](https://yernar.runasp.net/)
 
-## 🖼 Превью
+## 🖼 Preview
 
-Вот как выглядит приложение:
+Here's how the application looks:
 
-![Главная страница](images/login.png)
-![Форма Регистрации](images/register.png)
-![Админ-панель](images/admin.png)
-
+![Home Page](images/login.png)
+![Registration Form](images/register.png)
+![Admin Panel](images/admin.png)
