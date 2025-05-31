@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - The App</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/_AuthLayout.css" asp-append-version="true" />
+</head>
+<body>
+
+    <div class="container-fluid vh-100 d-flex align-items-center justify-content-center p-3">
+        <div class="auth-container row g-0 w-100">
+
+            <div class="col-lg-6 order-2 order-lg-1">
+                <div class="p-4 p-lg-5 h-100 d-flex flex-column justify-content-center">
+                    <div class="logo mb-4">THE APP</div>
+
+  
+                    <main role="main">
+                        @RenderBody()
+                    </main>
+                </div>
+            </div>
+
+ 
+            <div class="col-lg-6 order-1 order-lg-2" style="border-radius: 5% 70% 2% 66%;/*! background: linear-gradient(109.6deg, rgb(218, 185, 252) 11.2%, rgb(125, 89, 252) 91.1%); */background: radial-gradient(circle at 10% 20%, rgb(186, 190, 245) 0%, rgb(192, 192, 245) 33.1%, rgb(218, 203, 246) 90%);">
+                <div class="auth-visual d-flex align-items-center justify-content-center position-relative text-white ">
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

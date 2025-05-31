@@ -1,0 +1,85 @@
+﻿@model RegisterViewModel
+@{
+    ViewData["Title"] = "Sign Up";
+    Layout = "~/Views/Shared/_AuthLayout.cshtml";
+}
+<div class="mb-4">
+    <p class="auth-subtitle">Join us today</p>
+    <h2 class="h3 fw-semibold text-dark mb-0">Create Your Account</h2>
+</div>
+
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        <div asp-validation-summary="All"></div>
+    </div>
+}
+
+<form method="post">
+    <div class="mb-3">
+        <label class="form-label text-muted small" asp-for="FullName">Full Name</label>
+        <input type="text" class="form-control" asp-for="FullName" placeholder="David Williams" required>
+        <span asp-validation-for="FullName" class="text-danger small"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label text-muted small" asp-for="Email">E-mail</label>
+        <input type="email" class="form-control" asp-for="Email" placeholder="david@example.com" required>
+        <span asp-validation-for="Email" class="text-danger small"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label text-muted small" asp-for="Password">Password</label>
+        <input type="password" class="form-control" asp-for="Password" placeholder="••••••••" required>
+        <span asp-validation-for="Password" class="text-danger small"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label text-muted small" asp-for="ConfirmPassword">Confirm Password</label>
+        <input type="password" class="form-control" asp-for="ConfirmPassword" placeholder="••••••••" required>
+        <span asp-validation-for="ConfirmPassword" class="text-danger small"></span>
+    </div>
+    <div class="form-check mb-4">
+        <input class="form-check-input" type="checkbox" asp-for="AgreeTerms" id="agreeTerms" required>
+        <label class="form-check-label small text-muted" for="agreeTerms">
+            I agree to the <a href="#" class="text-link" data-bs-toggle="modal" data-bs-target="#termsModal">Terms of Service</a>
+            and <a href="#" class="text-link" data-bs-toggle="modal" data-bs-target="#privacyModal">Privacy Policy</a>
+        </label>
+        <span asp-validation-for="AgreeTerms" class="text-danger small d-block"></span>
+    </div>
+    <button type="submit" class="btn btn-primary w-100 mb-4">Create Account</button>
+</form>
+<div class="text-center">
+    <div class="small text-muted">
+        Already have an account?
+        <a asp-controller="Auth" asp-action="Login" class="text-link">Sign in</a>
+    </div>
+</div>
+
+
+<div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="termsModalLabel">Terms of Service</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p> ⚠️ Terms of Service description...</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="privacyModal" tabindex="-1" aria-labelledby="privacyModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="privacyModalLabel">Privacy Policy</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p> 🚫 Privacy Policy description...</p>
+            </div>
+        </div>
+    </div>
+</div>

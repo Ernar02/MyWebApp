@@ -1,0 +1,140 @@
+﻿@model IEnumerable<WebApp.Models.User>
+@{
+    ViewData["Title"] = "Admin Panel";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 class="mb-4">Welcome to Admin Panel</h2>
+
+
+<div class="admin-container">
+    <div class="admin-header">
+        <h1 class="admin-title">User Management</h1>
+    </div>
+
+    <div class="actions-bar">
+        <button class="btn-action btn-block" id="blockBtn">
+            🔒 Block
+        </button>
+        <button class="btn-action btn-thumbs" id="thumbsBtn">
+            🔓
+        </button>
+        <button class="btn-action btn-delete" id="deleteBtn">
+            🗑️
+        </button>
+
+        <div class="filter-container">
+            <input type="text" class="filter-input" placeholder="Filter" id="filterInput">
+        </div>
+    </div>
+
+    <div class="users-table">
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead class="table-header">
+                <tr>
+                    <th>
+                        <input type="checkbox" class="select-all-checkbox" id="selectAll">
+                    </th>
+                    <th>Name</th>
+                    <th>Email <span style="color: #9ca3af;">↓</span></th>
+                    <th>Last seen</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model)
+                {
+                    <tr class="table-row user-row @(user.IsBlocked ? "user-blocked" : "")" data-email="@user.Email.ToLower()" data-name="@user.Name.ToLower()">
+                        <td class="table-cell">
+                            <input type="checkbox" class="user-checkbox" data-user-id="@user.Id">
+                        </td>
+                        <td class="table-cell">
+                            <div class="user-info">
+                                <div class="user-name">@user.Name</div>
+                            </div>
+                        </td>
+                        <td class="table-cell">
+                            <div class="user-email">@user.Email</div>
+                        </td>
+                        <td class="table-cell" style="display: flex">
+                            <div class="last-seen">
+                                <div class="last-seen-text">
+                                    @{
+                                        string lastSeenText = "Never";
+                                        if (user.LastSeen.HasValue)
+                                        {
+                                            var lastSeenUtc = user.LastSeen.Value;
+                                            var timeDiff = DateTime.UtcNow - lastSeenUtc;
+
+                                            if (timeDiff.TotalSeconds < 0)
+                                            {
+                                                lastSeenText = "just now";
+                                            }
+                                            else if (timeDiff.TotalMinutes < 1)
+                                            {
+                                                lastSeenText = "a minute ago";
+                                            }
+                                            else if (timeDiff.TotalMinutes < 60)
+                                            {
+                                                int minutes = (int)timeDiff.TotalMinutes;
+                                                lastSeenText = $"{minutes} minute{(minutes == 1 ? "" : "s")} ago";
+                                            }
+                                            else if (timeDiff.TotalHours < 24)
+                                            {
+                                                int hours = (int)timeDiff.TotalHours;
+                                                lastSeenText = $"{hours} hour{(hours == 1 ? "" : "s")} ago";
+                                            }
+                                            else if (timeDiff.TotalDays < 7)
+                                            {
+                                                int days = (int)timeDiff.TotalDays;
+                                                lastSeenText = $"{days} day{(days == 1 ? "" : "s")} ago";
+                                            }
+                                            else if (timeDiff.TotalDays < 30)
+                                            {
+                                                int weeks = (int)(timeDiff.TotalDays / 7);
+                                                lastSeenText = $"{weeks} week{(weeks == 1 ? "" : "s")} ago";
+                                            }
+                                            else if (timeDiff.TotalDays < 365)
+                                            {
+                                                int months = (int)(timeDiff.TotalDays / 30.44);
+                                                lastSeenText = $"{months} month{(months == 1 ? "" : "s")} ago";
+                                            }
+                                            else
+                                            {
+                                                int years = (int)(timeDiff.TotalDays / 365.24);
+                                                lastSeenText = $"{years} year{(years == 1 ? "" : "s")} ago";
+                                            }
+                                        }
+                                    }
+                                    @lastSeenText
+
+                                </div>
+                                <div class="activity-chart">
+                                    <div class="chart-bar"></div>
+                                    <div class="chart-bar"></div>
+                                    <div class="chart-bar"></div>
+                                    <div class="chart-bar"></div>
+                                    <div class="chart-bar"></div>
+                                    <div class="chart-bar"></div>
+                                    <div class="chart-bar"></div>
+                                    <div class="chart-bar"></div>
+                                    <div class="chart-bar"></div>
+                                    <div class="chart-bar"></div>
+                                </div>
+                                @if (user.LastSeen.HasValue)
+                                {
+                                    <div class="timestamp-tooltip">@user.LastSeen.Value.ToString("MMMM dd, yyyy HH:mm:ss")</div>
+                                }
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>  
+
+
+
+@section Scripts {
+    <script src="~/js/admin.js"></script>
+}
